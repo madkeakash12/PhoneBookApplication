@@ -1,0 +1,253 @@
+package com.phonebook.controller;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.Collection;
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.phonebook.eniity.ContactEntity;
+import com.phonebook.service.ContactService;
+
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
+@WebMvcTest(value = ContactRestController.class)
+public class ContactRestControllerTest {
+
+	@MockBean
+	private ContactService service;
+
+	// it is used to send a request to Rest controller class
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Test
+	@Ignore
+	public void test_saveContact_01() throws Exception {
+
+		// create a mock object to perform unit test
+		when(service.saveContact(Mockito.any())).thenReturn(true);
+
+		ContactEntity c = new ContactEntity(101, "Akash", "ae@gmail.com", 8522255);
+		// by using jackson API
+		ObjectMapper mapper = new ObjectMapper();
+		String json = null;
+		try {
+			json = mapper.writeValueAsString(c);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		// make a request to REST controller-create post request
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.post("/api/contact/save")
+				.contentType("application/json").content(json);
+
+		// send a request
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+		// get response
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(201, status);
+	}
+
+	@Test
+	@Ignore
+	public void test_saveContact_02() throws Exception {
+
+		// create a mock object to perform unit test
+		when(service.saveContact(Mockito.any())).thenThrow(RuntimeException.class);
+
+		ContactEntity c = new ContactEntity(101, "Akash", "ae@gmail.com", 8522255);
+		// by using jackson API
+		ObjectMapper mapper = new ObjectMapper();
+		String json = null;
+		try {
+			json = mapper.writeValueAsString(c);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		// make a request to REST controller-create post request
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.post("/api/contact/save")
+				.contentType("application/json").content(json);
+
+		// send a request
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+		// get response
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(500, status);
+	}
+
+	@Test
+	@Ignore
+	public void test_saveContact_03() throws Exception {
+
+		// create a mock object to perform unit test
+		when(service.saveContact(Mockito.any())).thenReturn(false);
+
+		ContactEntity c = new ContactEntity(101, "Akash", "ae@gmail.com", 8522255);
+		// by using jackson API
+		ObjectMapper mapper = new ObjectMapper();
+		String json = null;
+		try {
+			json = mapper.writeValueAsString(c);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		// make a request to REST controller-create post request
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.post("/api/contact/save")
+				.contentType("application/json").content(json);
+
+		// send a request
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+		// get response
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(500, status);
+	}
+
+	@Test
+	@Ignore
+	public void test_getAllContact_1() throws Exception {
+
+		when(service.getAllContacts()).thenReturn(Collections.emptyList());
+
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/api/contact");
+
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(200, status);
+	}
+
+	@Test
+	@Ignore
+	public void test_getAllContact_2() throws Exception {
+
+		when(service.getAllContacts()).thenThrow(RuntimeException.class);
+
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/api/contact");
+
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(200, status);
+	}
+
+	@Test
+	@Ignore
+	public void getContactById_01() throws Exception {
+
+		ContactEntity con = new ContactEntity(101, "Akash", "akash@gmail.com", 986532541);
+		when(service.getContactById(101)).thenReturn(con);
+
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/api/contact/101");
+
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(200, status);
+
+	}
+
+	@Test
+	@Ignore
+	public void getContactById_02() throws Exception {
+
+		//ContactEntity con = new ContactEntity(101, "Akash", "akash@gmail.com", 986532541);
+		when(service.getContactById(101)).thenThrow(RuntimeException.class);
+
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/api/contact/101");
+
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(200, status);
+
+	}
+	
+	@Test
+	@Ignore
+	public void deletebyId_01() throws Exception {
+		
+		when(service.deleteContactById(101)).thenReturn(true);
+		
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.delete("/api/contact/101");
+
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(200, status);
+	}
+	
+	@Test
+	@Ignore
+	public void deletebyId_02() throws Exception {
+		
+		when(service.deleteContactById(101)).thenReturn(false);
+		
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.delete("/api/contact/101");
+
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(500, status);
+	}
+	
+	@Test
+	public void deletebyId_03() throws Exception {
+		
+		when(service.deleteContactById(101)).thenThrow(RuntimeException.class);
+		
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.delete("/api/contact/101");
+
+		MvcResult mvcResult = mockMvc.perform(reqBuilder).andReturn();
+
+		MockHttpServletResponse response = mvcResult.getResponse();
+
+		int status = response.getStatus();
+
+		assertEquals(500, status);
+	}
+
+}

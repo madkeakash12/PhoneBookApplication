@@ -1,0 +1,5 @@
+package com.phonebook.swagger;
+
+public class SwaggerConfig {
+
+}

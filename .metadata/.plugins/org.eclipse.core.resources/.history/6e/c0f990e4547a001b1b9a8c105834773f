@@ -1,0 +1,21 @@
+package com.phonebook.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.phonebook.exception.NoContactDetailFoundException;
+
+@RestControllerAdvice
+public class RestExeceptionHaldler {
+
+	@ExceptionHandler(value = NoContactDetailFoundException.class)
+	public ResponseEntity<String> NoContactException(NoContactDetailFoundException ncdfe) {
+
+		String msg = ncdfe.getMessage();
+
+		return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+	}
+
+}

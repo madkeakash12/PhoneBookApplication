@@ -1,0 +1,5 @@
+package com.phonebook.constants;
+
+public class AppConstants {
+
+}

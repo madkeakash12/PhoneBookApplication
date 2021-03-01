@@ -1,0 +1,52 @@
+package com.phonebook.service.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.phonebook.eniity.ContactEntity;
+import com.phonebook.exception.NoContactDetailFoundException;
+import com.phonebook.repository.ContactJpaRepo;
+import com.phonebook.service.ContactService;
+@Service
+public class ContactServiceImpl implements ContactService {
+
+	private ContactJpaRepo repository;
+
+	public ContactServiceImpl(ContactJpaRepo repository) {
+		this.repository = repository;
+	}
+
+	@Override
+	public boolean saveContact(ContactEntity contact) {
+		ContactEntity saveContact = repository.save(contact);
+		return saveContact.getContactId() != null;
+	}
+
+	@Override
+	public List<ContactEntity> getAllContacts() {
+		return repository.findAll();
+	}
+
+	@Override
+	public ContactEntity getContactById(Integer contactId) {
+		Optional<ContactEntity> optional = repository.findById(contactId);
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+		return throw new NoContactDetailFoundException("No Contact Information Found");
+	}
+
+	@Override
+	public boolean deleteContactById(Integer contactId) {
+		try {
+			repository.deleteById(contactId);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.phonebook.exception;
+
+public class NoContactDetailFoundException extends RuntimeException {
+
+	
+	public NoContactDetailFoundException(String message) {
+		super(message);
+	}
+
+}

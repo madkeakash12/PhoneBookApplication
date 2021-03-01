@@ -1,0 +1,41 @@
+package com.phonebook.controller;
+
+import static org.mockito.Mockito.when;
+
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.phonebook.eniity.ContactEntity;
+import com.phonebook.service.ContactService;
+
+@WebMvcTest(value = ContactRestController.class)
+public class ContactRestControllerTest {
+
+	@MockBean
+	private ContactService service;
+
+	// it is used to send a request
+	@Autowired
+	private MockMvc mockMvc;
+
+	public void test_saveContact() {
+
+		when(service.saveContact(Mockito.any())).thenReturn(true);
+		
+		ContactEntity contact= new ContactEntity(101, "Akash Madke", "akashmadke@gmail.com", 8522255);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json = mapper.writeValueAsString(contact);
+		
+		// make a request to REST controller-create post request
+		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.post("/save").content("application/json")
+				.content(json);
+
+	}
+
+}

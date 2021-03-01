@@ -1,0 +1,14 @@
+package com.phonebook.exception;
+
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+public class NoContactDetailFoundException extends RuntimeException {
+	
+	
+	public NoContactDetailFoundException() {}
+	
+	public NoContactDetailFoundException(String message) {
+		super(message);
+	}
+
+}

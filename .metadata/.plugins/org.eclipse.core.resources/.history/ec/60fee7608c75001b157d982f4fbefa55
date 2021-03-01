@@ -1,0 +1,14 @@
+package com.phonebook.exception;
+
+import javassist.SerialVersionUID;
+
+public class NoContactDetailFoundException extends RuntimeException {
+	
+	
+	public NoContactDetailFoundException() {}
+	
+	public NoContactDetailFoundException(String message) {
+		super(message);
+	}
+
+}

@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    password: ''
+    url: jdbc:h2:mem:testdb
+    username: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+phonebook:
+    messages:
+       saveContactSuccess: Contact saved successfully
+       saveContactFailed: Failed to saved contact
+       deleteContactSuccess: Contact delete successfully
+       deleteContactFailed: Failed to delete contact

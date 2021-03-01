@@ -1,0 +1,5 @@
+package com.phonebook.props;
+
+public class AppProperties {
+
+}

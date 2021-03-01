@@ -1,0 +1,87 @@
+package com.phonebook.controller;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.phonebook.eniity.ContactEntity;
+import com.phonebook.service.ContactService;
+
+import io.swagger.annotations.Api;
+
+@RestController
+@RequestMapping("/api/contact")
+@Api
+public class ContactRestController {
+
+	private static final Logger logger = LoggerFactory.getLogger(ContactRestController.class);
+
+	private ContactService service;
+
+	public ContactRestController(ContactService service) {
+		this.service = service;
+	}
+
+	@PostMapping(value = "/save")
+	public ResponseEntity<String> saveContact(@RequestBody ContactEntity contact) {
+		
+		
+		logger.debug(" **** saveContact() Execution Started ***** ");
+		try {
+			boolean saveCotact = service.saveContact(contact);
+			if (saveCotact) {
+				logger.info(" **** saveContact() - Contact Saved **** ");
+				return new ResponseEntity<>("Saved Contact", HttpStatus.CREATED);
+			}
+
+		} catch (Exception e) {
+			logger.error("  ** Exception Occurred: **" + e.getMessage());
+		}
+
+		logger.debug(" **** saveContact() - Conatct Not Saved ***** ");
+		return new ResponseEntity<>("Failed Contact", HttpStatus.INTERNAL_SERVER_ERROR);
+
+	}
+
+	@GetMapping
+	public ResponseEntity<List<ContactEntity>> getAllContact() {
+
+		List<ContactEntity> contact = service.getAllContacts();
+
+		return new ResponseEntity<>(contact, HttpStatus.OK);
+
+	}
+
+	@GetMapping(value = "{contactId}")
+	public ResponseEntity<ContactEntity> getContactById(@PathVariable Integer contactId) {
+
+		ContactEntity contact = service.getContactById(contactId);
+
+		return new ResponseEntity<>(contact, HttpStatus.OK);
+	}
+
+	@DeleteMapping(value = "{contactId}")
+	public ResponseEntity<String> deletebyId(@PathVariable Integer contactId) {
+
+		boolean isDelete = service.deleteContactById(contactId);
+
+		if (isDelete) {
+			return new ResponseEntity<>("Conatct deleted", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Failed", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+}

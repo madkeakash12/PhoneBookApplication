@@ -1,0 +1,120 @@
+package com.phonebook.controller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.phonebook.constants.AppConstants;
+import com.phonebook.eniity.ContactEntity;
+import com.phonebook.props.AppProperties;
+import com.phonebook.service.ContactService;
+
+import io.swagger.annotations.Api;
+
+@RestController
+@RequestMapping(value = "/api/contact")
+@Api
+public class ContactRestController {
+
+	private static final Logger logger = LoggerFactory.getLogger(ContactRestController.class);
+
+	private ContactService service;
+	private AppProperties appProps;
+
+	public ContactRestController(ContactService service, AppProperties appProps) {
+		this.service = service;
+		this.appProps = appProps;
+	}
+
+	@PostMapping(value = "/save")
+	public ResponseEntity<String> saveContact(@RequestBody ContactEntity contact) {
+
+		logger.debug(" **** saveContact() Execution Started ***** ");
+		try {
+			boolean saveCotact = service.saveContact(contact);
+			if (saveCotact) {
+				logger.info(" **** saveContact() - Contact Saved **** ");
+
+				String succMsg = appProps.getMessages().get(AppConstants.SAVE_CONTACT_SUCCESS);
+				return new ResponseEntity<>(succMsg, HttpStatus.CREATED);
+			}
+
+		} catch (RuntimeException e) {
+			logger.error("  ** Exception Occurred: **" + e.getMessage());
+		}
+
+		logger.debug(" **** saveContact() - Conatct Not Saved ***** ");
+		String failMsg = appProps.getMessages().get(AppConstants.SAVE_CONTACT_FAILED);
+		return new ResponseEntity<>(failMsg, HttpStatus.INTERNAL_SERVER_ERROR);
+
+	}
+
+	@GetMapping
+	public ResponseEntity<List<ContactEntity>> getAllContact() {
+		logger.debug(" ** getAllContact() - Execution Started **");
+
+		List<ContactEntity> contact = null;
+
+		try {
+			contact = service.getAllContacts();
+			if (contact.isEmpty()) {
+				logger.info(" **** getAllContact()- Record Not Availabe ****");
+			}
+
+		} catch (RuntimeException e) {
+			logger.error(" ** Exception Occurred: " + e.getMessage());
+		}
+		logger.debug(" **** getAllContact() -Execution Ended ****");
+		return new ResponseEntity<>(contact, HttpStatus.OK);
+
+	}
+
+	@GetMapping(value = "{contactId}")
+	public ResponseEntity<ContactEntity> getContactById(@PathVariable Integer contactId) {
+
+		logger.debug(" *** getContactById() - Execution Started **** ");
+		ContactEntity contact = null;
+		try {
+			logger.info(" *** getContactById()- getContact ***");
+			contact = service.getContactById(contactId);
+
+		} catch (RuntimeException e) {
+			logger.error(" **** Exception Occurred ***** :: " + e.getMessage());
+
+		}
+		logger.debug(" *** getContactById() *** -Execution Ended ");
+		return new ResponseEntity<>(contact, HttpStatus.OK);
+	}
+
+	@DeleteMapping(value = "{contactId}")
+	public ResponseEntity<String> deletebyId(@PathVariable Integer contactId) {
+
+		logger.debug("*** deleteContactById() - Execution Started **** ");
+
+		try {
+			boolean isDelete = service.deleteContactById(contactId);
+			if (isDelete) {
+				logger.info(" **** deleteContactById() - Contact Deleted**** ");
+				String succMsg = appProps.getMessages().get(AppConstants.DELETE_CONTACT_SUCCESS);
+				return new ResponseEntity<>(succMsg, HttpStatus.OK);
+			}
+		} catch (RuntimeException e) {
+			logger.error(" **** Exception Occurred ***** :: " + e.getMessage());
+		}
+
+		logger.debug(" *** deleteContactById() *** -Execution Ended ");
+		String failMsg = appProps.getMessages().get(AppConstants.DELETE_CONTACT_FAILED);
+		return new ResponseEntity<>(failMsg, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+}

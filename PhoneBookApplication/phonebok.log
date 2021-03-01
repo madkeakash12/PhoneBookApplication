@@ -1,0 +1,44 @@
+2021-02-24 16:16:19.686  INFO 16616 --- [restartedMain] com.phonebook.PhoneBookApplication       : Starting PhoneBookApplication using Java 1.8.0_231 on DESKTOP-3P1794I with PID 16616 (C:\Users\7d78za\Desktop\Mini_Proj_Book_App\PhoneBookApplication\target\classes started by Akash in C:\Users\7d78za\Desktop\Mini_Proj_Book_App\PhoneBookApplication)
+2021-02-24 16:16:19.689  INFO 16616 --- [restartedMain] com.phonebook.PhoneBookApplication       : No active profile set, falling back to default profiles: default
+2021-02-24 16:16:19.740  INFO 16616 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-02-24 16:16:19.741  INFO 16616 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-02-24 16:16:21.375  INFO 16616 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-02-24 16:16:21.476  INFO 16616 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 88 ms. Found 1 JPA repository interfaces.
+2021-02-24 16:16:22.209  INFO 16616 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-02-24 16:16:22.220  INFO 16616 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-02-24 16:16:22.221  INFO 16616 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-02-24 16:16:22.803  INFO 16616 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2021-02-24 16:16:22.908  INFO 16616 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-02-24 16:16:22.909  INFO 16616 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3167 ms
+2021-02-24 16:16:23.251  INFO 16616 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-02-24 16:16:23.875  INFO 16616 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-02-24 16:16:23.977  INFO 16616 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2021-02-24 16:16:24.155  INFO 16616 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-02-24 16:16:24.200  INFO 16616 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.28.Final
+2021-02-24 16:16:24.310  INFO 16616 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-02-24 16:16:24.445  INFO 16616 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-02-24 16:16:24.975  INFO 16616 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-24 16:16:24.986  INFO 16616 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-24 16:16:25.021  INFO 16616 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-02-24 16:16:25.491  WARN 16616 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-24 16:16:25.745  INFO 16616 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-02-24 16:16:25.883  INFO 16616 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-24 16:16:26.267  INFO 16616 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-02-24 16:16:26.270  INFO 16616 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-02-24 16:16:26.324  INFO 16616 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-02-24 16:16:26.342  INFO 16616 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-02-24 16:16:26.497  INFO 16616 --- [restartedMain] com.phonebook.PhoneBookApplication       : Started PhoneBookApplication in 7.428 seconds (JVM running for 9.097)
+2021-02-24 16:16:26.739  INFO 16616 --- [RMI TCP Connection(1)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-24 16:16:26.739  INFO 16616 --- [RMI TCP Connection(1)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-02-24 16:16:26.741  INFO 16616 --- [RMI TCP Connection(1)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-02-24 16:18:25.129  INFO 16616 --- [http-nio-8080-exec-5] c.p.controller.ContactRestController     :  **** getAllContact()- Record Not Availabe ****
+2021-02-24 16:19:20.828  INFO 16616 --- [http-nio-8080-exec-4] c.p.controller.ContactRestController     :  **** saveContact() - Contact Saved **** 
+2021-02-24 16:20:30.151  INFO 16616 --- [http-nio-8080-exec-7] c.p.controller.ContactRestController     :  **** saveContact() - Contact Saved **** 
+2021-02-24 16:22:02.059 ERROR 16616 --- [http-nio-8080-exec-9] c.p.controller.ContactRestController     :  **** Exception Occurred ***** :: No Contact Information Found
+2021-02-24 16:22:44.204  INFO 16616 --- [RMI TCP Connection(4)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-02-24 16:22:44.493  INFO 16616 --- [RMI TCP Connection(4)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-02-24 16:22:44.496  INFO 16616 --- [RMI TCP Connection(4)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-02-24 16:22:44.496  INFO 16616 --- [RMI TCP Connection(4)-127.0.0.1] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-02-24 16:22:44.739  WARN 16616 --- [RMI TCP Connection(4)-127.0.0.1] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2021-02-24 16:22:44.741  INFO 16616 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-02-24 16:22:44.745  INFO 16616 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
